@@ -1,5 +1,7 @@
 import React from "react";
 
+import Statistics from "./Statistics";
+
 class Feedback extends React.Component {
   state = {
     good: 0,
@@ -7,23 +9,9 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  clickGood = () => {
+  clickEventBtn = (e) => {
     this.setState((prevState) => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-
-  clickNeutral = () => {
-    this.setState((prevState) => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-
-  clickBad = () => {
-    this.setState((prevState) => {
-      return { bad: prevState.bad + 1 };
+      return { [e.target.name]: prevState[e.target.name] + 1 };
     });
   };
 
@@ -39,24 +27,23 @@ class Feedback extends React.Component {
     return (
       <div>
         <h2>Please leave feedback</h2>
-        <button type="button" onClick={this.clickGood}>
+        <button type="button" name="good" onClick={this.clickEventBtn}>
           Good
         </button>
-        <button type="button" onClick={this.clickNeutral}>
+        <button type="button" name="neutral" onClick={this.clickEventBtn}>
           Neutral
         </button>
-        <button type="button" onClick={this.clickBad}>
+        <button type="button" name="bad" onClick={this.clickEventBtn}>
           Bad
         </button>
 
-        <h2>Statistics</h2>
-        <p>Good: {this.state.good}</p>
-        <p>Neutral: {this.state.neutral}</p>
-        <p>Bad: {this.state.bad}</p>
-        <p>Total: {this.countTotalFeedback()}</p>
-        <p>
-          Positive feedback: {this.countPositiveFeedbackPercentage() * 100}%
-        </p>
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage() * 100}
+        />
       </div>
     );
   }
