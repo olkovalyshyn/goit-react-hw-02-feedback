@@ -1,6 +1,7 @@
 import React from "react";
 
 import Statistics from "./Statistics";
+import FeedbackOptions from "./FeedbackOptions";
 
 class Feedback extends React.Component {
   state = {
@@ -9,9 +10,9 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  clickEventBtn = (e) => {
-    this.setState((prevState) => {
-      return { [e.target.name]: prevState[e.target.name] + 1 };
+  clickEventBtn = (option) => {
+    this.setState((state) => {
+      return { [option]: state[option] + 1 };
     });
   };
 
@@ -27,6 +28,12 @@ class Feedback extends React.Component {
     return (
       <div>
         <h2>Please leave feedback</h2>
+        <FeedbackOptions
+          options={["good", "neutral", "bad"]}
+          onLeaveFeedback={this.clickEventBtn}
+        />
+
+        {/* <h2>Please leave feedback</h2>
         <button type="button" name="good" onClick={this.clickEventBtn}>
           Good
         </button>
@@ -35,7 +42,7 @@ class Feedback extends React.Component {
         </button>
         <button type="button" name="bad" onClick={this.clickEventBtn}>
           Bad
-        </button>
+        </button> */}
 
         <Statistics
           good={this.state.good}
