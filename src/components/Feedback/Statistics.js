@@ -18,8 +18,6 @@ export default function Statistics({
           Positive feedback: {this.countPositiveFeedbackPercentage() * 100}%
         </p> */}
       <ul>
-        {" "}
-        Statistics
         <li>Good: {good}</li>
         <li>Neutral: {neutral}</li>
         <li>Bad: {bad}</li>

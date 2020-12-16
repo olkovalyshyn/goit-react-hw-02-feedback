@@ -2,7 +2,13 @@ import React from "react";
 
 export default function FeedbackOptions({ options, onLeaveFeedback }) {
   return options.map((option) => (
-    <button type="button" name={option} onClick={onLeaveFeedback(option)}>
+    <button
+      type="button"
+      name={option}
+      onClick={() => {
+        onLeaveFeedback(option);
+      }}
+    >
       {option}
     </button>
   ));
